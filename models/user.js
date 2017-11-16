@@ -20,7 +20,8 @@ let validEmailChecker = (email) => {
   if (!email) {
     return false;
   } else {
-    const regExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const regExp = new
+    RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     return regExp.test(email);
   }
 };
@@ -55,7 +56,8 @@ let validUsername = (username) => {
     return false;
   } else {
 
-    const regExp = new RegExp(/^[a-zA-Z0-9]+$/);
+    const regExp = new
+    RegExp(/^[a-zA-Z0-9]+$/);
     return regExp.test(username);
   }
 };
@@ -84,7 +86,8 @@ let validPassword = (password) => {
   if (!password) {
     return false;
   } else {
-    const regExp = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/);
+    const regExp = new
+    RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/);
     return regExp.test(password);
   }
 };
