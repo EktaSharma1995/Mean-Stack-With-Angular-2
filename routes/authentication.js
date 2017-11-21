@@ -204,12 +204,19 @@ module.exports = (router) => {
                   message: 'Invalid Password'
                 });
               } else {
-                const token = jwt.sign({userId: user._id }, config.secret, {expiresIn: '24h' });
+                const token = jwt.sign({
+                  userId: user._id
+                }, config.secret, {
+                  expiresIn: '24h'
+                });
                 res.json({
                   success: true,
                   message: 'Success!',
                   token: token,
-                  user: { username: user.username } });
+                  user: {
+                    username: user.username
+                  }
+                });
               }
             }
           }
@@ -220,15 +227,23 @@ module.exports = (router) => {
 
   router.use((req, res, next) => {
     const token = req.headers['authorization']; // Create token found in headers
-    // Check if token was found in headers
+    //Check
+    //if token was found in headers
     if (!token) {
-      res.json({ success: false, message: 'No token provided' }); // Return error
+      res.json({
+        success: false,
+        message: 'No token provided'
+      }); // Return error
     } else {
-      // Verify the token is valid
+      //Verify the token is valid
       jwt.verify(token, config.secret, (err, decoded) => {
-        // Check if error is expired or invalid
+        // Check
+        // if error is expired or invalid
         if (err) {
-          res.json({ success: false, message: 'Token invalid: ' + err }); // Return error for token validation
+          res.json({
+            success: false,
+            message: 'Token invalid: ' + err
+          }); // Return error for token validation
         } else {
           req.decoded = decoded; // Create global variable to use in any request beyond
           next(); // Exit middleware
@@ -239,16 +254,27 @@ module.exports = (router) => {
 
   router.get('/profile', (req, res) => {
     // Search for user in database
-    User.findOne({ _id: req.decoded.userId }).select('username email').exec((err, user) => {
+    User.findOne({
+      _id: req.decoded.userId
+    }).select('username email').exec((err, user) => {
       // Check if error connecting
       if (err) {
-        res.json({ success: false, message: err }); // Return error
+        res.json({
+          success: false,
+          message: err
+        }); // Return error
       } else {
         // Check if user was found in database
         if (!user) {
-          res.json({ success: false, message: 'User not found' }); // Return error, user was not found in db
+          res.json({
+            success: false,
+            message: 'User not found'
+          }); // Return error, user was not found in db
         } else {
-          res.json({ success: true, user: user }); // Return success, send user object to frontend for profile
+          res.json({
+            success: true,
+            user: user
+          }); // Return success, send user object to frontend for profile
         }
       }
     });
