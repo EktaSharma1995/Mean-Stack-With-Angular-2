@@ -30,12 +30,14 @@ export class BlogComponent implements OnInit {
   // Function to create new blog form
   createNewBlogForm() {
     this.form = this.formBuilder.group({
+      // Title field
       title: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(50),
         Validators.minLength(5),
         this.alphaNumericValidation
       ])],
+      // Body field
       body: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(500),
@@ -46,7 +48,7 @@ export class BlogComponent implements OnInit {
 
   // Enable new blog form
   enableFormNewBlogForm() {
-  this.form.get('title').enable(); // Enable title field
+    this.form.get('title').enable(); // Enable title field
     this.form.get('body').enable(); // Enable body field
   }
 
@@ -75,7 +77,7 @@ export class BlogComponent implements OnInit {
   // Reload blogs on current page
   reloadBlogs() {
     this.loadingBlogs = true; // Used to lock button
-    this.getAllBlogs();
+    this.getAllBlogs(); // Add any new blogs to the page
     setTimeout(() => {
       this.loadingBlogs = false; // Release button lock after four seconds
     }, 4000);
@@ -126,6 +128,7 @@ export class BlogComponent implements OnInit {
     window.location.reload(); // Clear all variable states
   }
 
+  // Function to get all blogs from the database
   getAllBlogs() {
     // Function to GET all blogs from database
     this.blogService.getAllBlogs().subscribe(data => {
@@ -139,7 +142,7 @@ export class BlogComponent implements OnInit {
       this.username = profile.user.username; // Used when creating new blog posts and comments
     });
 
-    this.getAllBlogs();
+    this.getAllBlogs(); // Get all blogs on component load
   }
 
 }

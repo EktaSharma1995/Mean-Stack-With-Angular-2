@@ -36,5 +36,15 @@ export class BlogService {
     return this.http.get(this.domain + 'blogs/allBlogs', this.options).map(res => res.json());
   }
 
+  getSingleBlog(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + 'blogs/singleBlog/' + id, this.options).map(res => res.json());
+  }
+
+  editBlog(blog) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.put(this.domain + 'blogs/updateBlog/', blog, this.options).map(res => res.json());
+  }
+
 
 }
